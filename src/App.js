@@ -1,24 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import React from "react";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { createBrowserHistory } from "history";
+import GreetingCat from "./GreetingCat";
+import RandomCat from "./RandomCat";
+
+const defaultHistory = createBrowserHistory();
+
+function App({ history = defaultHistory }) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter history={history}>
+      <Routes>
+        <Route path="/" element={<RandomCat />}></Route>
+        <Route  exact path="/cat/:greeting" element={<GreetingCat history={history}/>} ></Route>
+       </Routes>
+     </BrowserRouter>
   );
 }
 
